@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b1b1b">
+  <title>Claude Inspire — Assistant IA</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row">
+        <div class="brand"><span class="brand-mark">✳</span><span>Claude</span></div>
+        <button class="icon-btn sidebar-toggle" id="collapseSidebar" title="Réduire le menu" aria-label="Réduire le menu">◧</button>
+      </div>
+      <nav class="main-nav">
+        <button class="nav-item active" id="newChat"><span class="nav-icon">◯</span><span>Nouveau chat</span></button>
+        <button class="nav-item" data-notice="Les projets seront disponibles dans une prochaine version."><span class="nav-icon">▱</span><span>Projets</span></button>
+        <button class="nav-item" id="historyButton"><span class="nav-icon">▤</span><span>Historique</span></button>
+        <button class="nav-item" data-notice="L'explorateur de contenus sera disponible dans une prochaine version."><span class="nav-icon">◎</span><span>Explorer</span></button>
+        <button class="nav-item" id="settingsButton"><span class="nav-icon">⚙</span><span>Paramètres</span></button>
+      </nav>
+      <div class="models-label">Modèles</div>
+      <div class="model-list">
+        <button class="model-item selected" data-model="claude-sonnet-4-5"><span class="tiny-mark">✳</span><span>Claude Sonnet</span></button>
+        <button class="model-item" data-model="claude-haiku-4-5"><span class="tiny-mark">✳</span><span>Claude Haiku</span></button>
+        <button class="model-item" data-model="claude-opus-4-1"><span class="tiny-mark">✳</span><span>Claude Opus</span></button>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="avatar">S</div><span class="profile-name">Mon espace</span><button class="icon-btn" id="profileMenu" aria-label="Menu du profil">⌄</button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="mobile-header">
+        <button class="icon-btn" id="mobileMenu" aria-label="Ouvrir le menu">☰</button>
+        <div class="brand"><span class="brand-mark">✳</span><span>Claude</span></div>
+        <button class="icon-btn" id="mobileNewChat" aria-label="Nouveau chat">＋</button>
+      </header>
+
+      <section class="welcome" id="welcome">
+        <div class="hero-mark">✳</div>
+        <h1>Bonjour !</h1>
+        <p class="subtitle">Que souhaitez-vous créer aujourd'hui ?</p>
+        <div class="composer welcome-composer">
+          <textarea id="welcomeInput" rows="2" placeholder="Écrivez votre message à Claude..." aria-label="Votre message"></textarea>
+          <div class="composer-bottom">
+            <div class="composer-tools">
+              <button class="tool-btn" id="attachWelcome" title="Joindre une image" aria-label="Joindre une image">＋</button>
+              <span class="attachment-label" id="attachmentLabel"></span>
+            </div>
+            <div class="send-tools">
+              <select class="model-select" id="welcomeModel" aria-label="Choisir un modèle">
+                <option value="claude-sonnet-4-5">Claude Sonnet</option>
+                <option value="claude-haiku-4-5">Claude Haiku</option>
+                <option value="claude-opus-4-1">Claude Opus</option>
+              </select>
+              <button class="send-btn" id="welcomeSend" aria-label="Envoyer">↑</button>
+            </div>
+          </div>
+        </div>
+        <div class="suggestions">
+          <button class="suggestion" data-prompt="Aide-moi à écrire une histoire originale."><span>✧</span><b>Écris une histoire</b><small>Imagine quelque chose de nouveau</small><i>↗</i></button>
+          <button class="suggestion" data-prompt="Aide-moi à créer une application web moderne et explique les étapes."><span>⌘</span><b>Crée une application</b><small>Transforme une idée en projet</small><i>↗</i></button>
+          <button class="suggestion" data-prompt="Explique-moi un sujet complexe avec des mots simples et un exemple."><span>◇</span><b>Explique un concept</b><small>Comprends pas à pas</small><i>↗</i></button>
+          <button class="suggestion" data-prompt="Donne-moi cinq idées créatives de projets à réaliser."><span>✳</span><b>Trouve des idées</b><small>Explore de nouvelles possibilités</small><i>↗</i></button>
+        </div>
+      </section>
+
+      <section class="chat-view hidden" id="chatView">
+        <div class="messages" id="messages" aria-live="polite"></div>
+        <div class="chat-composer-wrap">
+          <div class="composer">
+            <div class="image-preview hidden" id="imagePreview"></div>
+            <textarea id="chatInput" rows="1" placeholder="Répondre à Claude..." aria-label="Votre message"></textarea>
+            <div class="composer-bottom">
+              <div class="composer-tools">
+                <button class="tool-btn" id="attachChat" title="Joindre une image" aria-label="Joindre une image">＋</button>
+                <span class="small-hint">Entrée pour envoyer · Maj + Entrée pour une nouvelle ligne</span>
+              </div>
+              <div class="send-tools">
+                <select class="model-select" id="chatModel" aria-label="Choisir un modèle">
+                  <option value="claude-sonnet-4-5">Claude Sonnet</option>
+                  <option value="claude-haiku-4-5">Claude Haiku</option>
+                  <option value="claude-opus-4-1">Claude Opus</option>
+                </select>
+                <button class="send-btn" id="chatSend" aria-label="Envoyer">↑</button>
+              </div>
+            </div>
+          </div>
+          <p class="disclaimer">L'IA peut faire des erreurs. Vérifiez les informations importantes.</p>
+        </div>
+      </section>
+
+      <section class="settings-view hidden" id="settingsView">
+        <div class="settings-panel">
+          <h1>Paramètres</h1><p>Personnalisez votre expérience.</p>
+          <label class="setting-row"><span><b>Apparence</b><small>Interface sombre</small></span><span class="pill">Sombre</span></label>
+          <label class="setting-row"><span><b>Modèle par défaut</b><small>Utilisé pour les nouveaux chats</small></span><select id="settingsModel" class="model-select"><option value="claude-sonnet-4-5">Claude Sonnet</option><option value="claude-haiku-4-5">Claude Haiku</option><option value="claude-opus-4-1">Claude Opus</option></select></label>
+          <div class="setting-row"><span><b>Confidentialité</b><small>Les conversations sont enregistrées uniquement dans ce navigateur pour l'historique local.</small></span></div>
+          <button class="danger-btn" id="clearHistory">Effacer l'historique local</button>
+          <p class="settings-note">La clé API doit rester dans le fichier .env du serveur, jamais dans cette page.</p>
+          <button class="primary-btn" id="backToChat">Retour au chat</button>
+        </div>
+      </section>
+
+      <div class="toast hidden" id="toast" role="status"></div>
+      <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
