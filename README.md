@@ -43,3 +43,12 @@ Si tu as partagé une vraie clé API dans un chat, révoque-la dans la console d
 
 ## Design
 L'interface utilise désormais une palette ivoire/blanc cassé et une typographie épurée inspirées de l'expérience visuelle moderne des assistants IA, avec une barre latérale discrète, des cartes simples et sans emojis décoratifs. Projet indépendant, non officiel.
+
+
+## Si tu vois « Cannot GET / »
+Cela signifie que le serveur ne trouve pas la page d'accueil ou que le serveur a été lancé depuis un mauvais dossier. Cette version définit explicitement la route `/`.
+- Décompresse le ZIP corrigé dans un nouveau dossier.
+- Ouvre le terminal dans le dossier où se trouvent `server.js`, `package.json` et `public/`.
+- Lance `npm install`, puis `npm start`.
+- Ouvre `http://localhost:3000`.
+Ne lance pas le fichier `server.js` depuis un autre dossier et ne double-clique pas sur `index.html`.

@@ -6,6 +6,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json({ limit: "20mb" }));
 app.use(express.static(path.join(__dirname, "public")));
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 const ALLOWED_MODELS = new Set([
   "claude-sonnet-4-5",
